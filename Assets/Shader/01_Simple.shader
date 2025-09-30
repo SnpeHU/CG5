@@ -2,7 +2,8 @@ Shader "Unlit/01_Simple"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+        //_MainTex ("Texture", 2D) = "white" {}
+        _Color("Color", Color) = (1,0,0,1)
     }
     SubShader
     {
@@ -18,6 +19,8 @@ Shader "Unlit/01_Simple"
             #pragma multi_compile_fog
 
             #include "UnityCG.cginc"
+
+            fixed4 _Color;
 
             struct appdata
             {
@@ -46,8 +49,7 @@ Shader "Unlit/01_Simple"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                // sample the texture
-                fixed4 col = tex2D(_MainTex, i.uv);
+                fixed4 col = _Color;
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;
