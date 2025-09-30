@@ -2,7 +2,7 @@ Shader "Unlit/02_Lambert"
 {
     Properties
     {
-        
+        _Color("Color", Color) = (1,0,0,1)
     }
     SubShader
     {
@@ -19,6 +19,8 @@ Shader "Unlit/02_Lambert"
 
             #include "UnityCG.cginc"
             #include "Lighting.cginc"
+
+            fixed4 _Color;
 
             struct appdata
             {
@@ -45,11 +47,11 @@ Shader "Unlit/02_Lambert"
             {
                 float intensity = saturate(dot(i.normal, _WorldSpaceLightPos0));
                 
-                fixed4 col = fixed4(1,1,1,1);
+                fixed4 col = _Color;
                 fixed4 diffuse = col * _LightColor0 * intensity;
 
                 // apply fog
-                //UNITY_APPLY_FOG(i.fogCoord, col);
+                UNITY_APPLY_FOG(i.fogCoord, col);
 
                 return diffuse;
                 
