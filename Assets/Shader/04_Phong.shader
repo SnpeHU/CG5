@@ -1,4 +1,4 @@
-Shader "Unlit/03_Specular"
+Shader "Unlit/04_Phong"
 {
     Properties
     {
@@ -30,11 +30,13 @@ Shader "Unlit/03_Specular"
 
             struct v2f
             {
-                UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
                 float3 normal : NORMAL;
                 float3 worldPosition : TEXCOORD1;
             };
+
+            sampler2D _MainTex;
+            float4 _MainTex_ST;
 
             v2f vert (appdata v)
             {
@@ -48,18 +50,18 @@ Shader "Unlit/03_Specular"
 
             fixed4 frag (v2f i) : SV_Target
             {
+                fixed4 ambient = _Color * 0.3 * _LightColor0;
+                fixed4 diffuse = _Color * _LightColor0 * saturate(dot(i.normal, _WorldSpaceLightPos0));
                 float3 viewDir = normalize(_WorldSpaceCameraPos.xyz - i.worldPosition);
                 float3 lightDir = normalize(_WorldSpaceLightPos0);
                 i.normal = normalize(i.normal);
-                //float3 reflectDir = reflect(-lightDir, i.normal);
                 float3 reflectDir = -lightDir + 2 * i.normal * dot(lightDir, i.normal);
                 float4 specular = pow(saturate(dot(viewDir, reflectDir)), 16) * _LightColor0;
+                fixed4 col = ambient + diffuse + specular;
                 // apply fog
-                
-                
-                fixed4 col = _Color + specular;
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;
+
             }
             ENDCG
         }
