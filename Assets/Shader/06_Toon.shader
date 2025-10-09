@@ -1,8 +1,8 @@
-Shader "Unlit/NewUnlitShader"
+Shader "Unlit/02_Lambert"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+        _Color("Color", Color) = (1,0,0,1)
     }
     SubShader
     {
@@ -18,39 +18,45 @@ Shader "Unlit/NewUnlitShader"
             #pragma multi_compile_fog
 
             #include "UnityCG.cginc"
+            #include "Lighting.cginc"
+
+            fixed4 _Color;
 
             struct appdata
             {
                 float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
+                float3 normal : NORMAL;
             };
 
             struct v2f
             {
-                float2 uv : TEXCOORD0;
-                UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
-            };
+                float3 normal : NORMAL;
 
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
+            };
 
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                UNITY_TRANSFER_FOG(o,o.vertex);
+                o.normal = UnityObjectToWorldNormal(v.normal);
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                // sample the texture
-                fixed4 col = tex2D(_MainTex, i.uv);
+                float intensity = saturate(dot(i.normal, _WorldSpaceLightPos0));
+                //toon shading
+                intensity = step(0.4, intensity) * 0.8 + step(0.5, intensity) * 0.8 +0.1;
+                //intensity = step(0.5, intensity);
+                fixed4 col = _Color;
+                fixed4 diffuse = col * _LightColor0 * intensity;
+
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
-                return col;
+
+                return diffuse;
+                
             }
             ENDCG
         }

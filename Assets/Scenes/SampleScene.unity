@@ -436,7 +436,7 @@ Light:
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 10440
+  m_ColorTemperature: 11568
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
@@ -455,13 +455,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.39248207, y: -0.26004395, z: 0.05351384, w: 0.8806085}
+  m_LocalRotation: {x: 0.15071833, y: -0.30159083, z: -0.03273113, w: 0.94088024}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 45.978, y: -36.77, z: -9.097}
+  m_LocalEulerAnglesHint: {x: 15.3, y: -36.77, z: -9.097}
 --- !u!114 &410087042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -650,17 +650,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8991710447569227455, guid: 78b7948647e2a674da71a0378ee92672, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2bb0e9820dcb1f1408b3cddc0f5a1e9c, type: 2}
     - target: {fileID: -8679921383154817045, guid: 78b7948647e2a674da71a0378ee92672, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.83
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 78b7948647e2a674da71a0378ee92672, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.82736325
+      value: 0.547
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 78b7948647e2a674da71a0378ee92672, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.10116339
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 78b7948647e2a674da71a0378ee92672, type: 3}
       propertyPath: m_LocalRotation.w
@@ -694,6 +698,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dragon
       objectReference: {fileID: 0}
+    - target: {fileID: 3262692768373065345, guid: 78b7948647e2a674da71a0378ee92672, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2bb0e9820dcb1f1408b3cddc0f5a1e9c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
